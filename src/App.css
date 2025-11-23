@@ -43,6 +43,14 @@
     color: #888;
 }
 
-/*ul {*/
-/*    list-style-type: none;*/
-/*}*/
+div.audio-container {
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+div.audio-item {
+    flex: 1 1 auto;
+}
