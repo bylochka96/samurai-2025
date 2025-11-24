@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 
 //bookmarks urls
 const apihub = "https://apihub.it-incubator.io/"
-const swagger = "https://musicfun.it-incubator.app/api"
 
 //baseUrlForApi
 const baseApiUrl = 'https://musicfun.it-incubator.app/api/1.0';
@@ -60,7 +59,6 @@ function App() {
                         <div className={'audio-item'} key={track.id}
                              onClick={() => {
                                  setSelectedTrackId(track.id);
-                                 setSelectedTrack(null);
                                  const getLyricsUrl = `${baseApiUrl}` + `${getLyricsEndpoint(track.id)}`;
                                  fetch(getLyricsUrl, {headers})
                                      .then(res => res.json())
@@ -81,9 +79,25 @@ function App() {
             </div>
             <div>
                 <h3>Details</h3>
+                {/*{!selectedTrackId && <div>Track is not selected</div>}*/}
+                {/*{selectedTrackId && (selectedTrack?.id !== selectedTrackId) && <div>Loading...</div>}*/}
+                {/*{selectedTrackId && (selectedTrack?.id === selectedTrackId) && <div></div>*/}
+                {/*    && <div>*/}
+                {/*        <div>*/}
+                {/*            {`Title: ${selectedTrack.attributes.title === null*/}
+                {/*                ? 'No title'*/}
+                {/*                : `${selectedTrack.attributes.title}`}`}*/}
+                {/*        </div>*/}
+                {/*        <div>*/}
+                {/*            {`Lyrics: ${selectedTrack.attributes.lyrics === null*/}
+                {/*                ? 'No Lyrics'*/}
+                {/*                : `${selectedTrack.attributes.lyrics}`}`}*/}
+                {/*        </div>*/}
+                {/*    </div>}*/}
+
                 {selectedTrackId === null
                     ? <div>Track is not selected</div>
-                    : selectedTrack === null
+                    : selectedTrack?.id !== selectedTrackId
                         ? <div>Loading...</div>
                         : <div>
                             <div>
@@ -96,8 +110,7 @@ function App() {
                                     ? 'No Lyrics'
                                     : `${selectedTrack.attributes.lyrics}`}`}
                             </div>
-                        </div>
-                }
+                        </div>}
             </div>
         </>
     )
