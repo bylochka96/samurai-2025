@@ -2,7 +2,7 @@ import './App.css'
 import {useEffect, useState} from "react";
 
 //bookmarks urls
-const apihub = "https://apihub.it-incubator.io/"
+const apiHub = "https://apihub.it-incubator.io/"
 
 //baseUrlForApi
 const baseApiUrl = 'https://musicfun.it-incubator.app/api/1.0';
@@ -14,6 +14,10 @@ const getLyricsEndpoint = (trackId: number): string => `/playlists/tracks/${trac
 //api key for api requests
 const apiKey = 'find at apiHub';
 
+//default header
+const headers = {
+    'api-key': apiKey,
+};
 
 function App() {
 
@@ -21,18 +25,23 @@ function App() {
     const [selectedTrack, setSelectedTrack] = useState(null);
     const [tracks, setTracks] = useState(null);
 
-
-    const getUrl = `${baseApiUrl}` + `${getAllTracksEndpoint}`;
-    const headers = {
-        'api-key': apiKey,
-    };
-
     useEffect(() => {
-        fetch(getUrl, {headers})
+        const getAllTracksUrl = `${baseApiUrl}` + `${getAllTracksEndpoint}`;
+        fetch(getAllTracksUrl, {headers})
             .then(res => res.json())
             .then(json => setTracks(json.data))
     }, []);
 
+    useEffect(() => {
+        if (selectedTrackId) {
+            const getLyricsUrl = `${baseApiUrl}` + `${getLyricsEndpoint(selectedTrackId)}`;
+            fetch(getLyricsUrl, {headers})
+                .then(res => res.json())
+                .then(json => {
+                    setSelectedTrack(json.data);
+                });
+        }
+    }, [selectedTrackId]);
 
     if (tracks === null) {
         return (
@@ -50,7 +59,7 @@ function App() {
             <h1>Samurai Player</h1>
             <button onClick={() => {
                 setSelectedTrackId(null);
-                setSelectedTrack(null);
+                // setSelectedTrack(null);
             }}>Reset selection
             </button>
             <div className={"audio-container"}>
@@ -59,12 +68,6 @@ function App() {
                         <div className={'audio-item'} key={track.id}
                              onClick={() => {
                                  setSelectedTrackId(track.id);
-                                 const getLyricsUrl = `${baseApiUrl}` + `${getLyricsEndpoint(track.id)}`;
-                                 fetch(getLyricsUrl, {headers})
-                                     .then(res => res.json())
-                                     .then(json => {
-                                         setSelectedTrack(json.data);
-                                     });
                              }}
                              style={{border: track.id === selectedTrackId ? '1px dashed orange' : 'none',}}>
                             <div>
