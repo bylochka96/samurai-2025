@@ -43,7 +43,7 @@
     color: #888;
 }
 
-div.audio-container {
+div.list-track-container {
     display: flex;
     width: 100%;
     flex-flow: row wrap;
@@ -51,6 +51,24 @@ div.audio-container {
     gap: 10px;
 }
 
+div.audio-container {
+    display: flex;
+    width: 100%;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+div.list-track-item {
+    flex: 1 1 auto;
+    margin: 5px;
+}
+
 div.audio-item {
     flex: 1 1 auto;
+    margin: 5px;
+}
+
+button {
+    border: 1px lightskyblue solid;
 }
