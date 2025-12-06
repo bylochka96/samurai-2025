@@ -1,9 +1,12 @@
-export function ResetTrackSelection() {
+export function ResetTrackSelection({setSelectedTrackId}) {
+
+    const handleResetTrackSelection = () => {
+        setSelectedTrackId(null);
+    }
+
     return (
         <>
-            <button onClick={() => {
-                // setSelectedTrackId(null);
-            }}>Reset selection
+            <button onClick={handleResetTrackSelection}>Reset selection
             </button>
         </>
     )

@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import {apiKey, baseApiUrl, endpoints} from "../../constants.ts";
+import {TrackItem} from "./TrackItem.tsx";
 
 
-export function TrackList() {
+export function TrackList({selectedTrackId, setSelectedTrackId}) {
 
     const [tracks, setTracks] = useState(null);
-    const [selectedTrackId, setSelectedTrackId] = useState(null);
 
     //default header
     const headers = {'api-key': apiKey};
@@ -35,22 +35,13 @@ export function TrackList() {
             <div className={"list-track-container"}>
                 {tracks.map((track: object) => {
                     return (
-                        <div className={'list-track-item'} key={track.id}
-                             onClick={() => {
-                                 setSelectedTrackId(track.id);
-                             }}
-                             style={{border: track.id === selectedTrackId ? '1px dashed orange' : 'none'}}
-                        >
-                            <div>
-                                {track.attributes.title}
-                            </div>
-                            <audio src={track.attributes.attachments[0].url}
-                                   controls
-                            ></audio>
-                        </div>
+                        <TrackItem isSelected={track.id === selectedTrackId}
+                                   setSelectedTrackId={setSelectedTrackId}
+                                   track={track} key={track.id}/>
                     )
                 })}
             </div>
         </>
     )
 }
+

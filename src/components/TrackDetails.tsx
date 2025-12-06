@@ -1,13 +1,13 @@
 import {apiKey, baseApiUrl, endpoints} from "../../constants.ts";
 import {useEffect, useState} from "react";
 
-export function TrackDetails() {
+export function TrackDetails({selectedTrackId}) {
 
     const [selectedTrack, setSelectedTrack] = useState(null);
 
     //default header
     const headers = {'api-key': apiKey};
-    const selectedTrackId = null;
+    // const selectedTrackId = props.selectedTrackId;
 
     useEffect(() => {
         if (selectedTrackId) {

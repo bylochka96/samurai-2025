@@ -12,6 +12,4 @@ export const endpoints = {
 };
 
 //api-key parameter for api request's header
-// const apiKey: string = 'find at apiHub';
-export const apiKey: string = '84927379-70eb-4403-b06e-8fe1b70aa880';
-
+export const apiKey: string = 'find at apiHub';
